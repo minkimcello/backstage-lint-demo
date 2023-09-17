@@ -20,7 +20,8 @@
     "lint": "backstage-cli repo lint --since origin/main",
     "lint:all": "backstage-cli repo lint",
     "prettier:check": "prettier --check .",
-    "new": "backstage-cli new --scope internal"
+    "new": "backstage-cli new --scope internal",
+    "postinstall": "patch-package"
   },
   "workspaces": {
     "packages": [
@@ -34,6 +35,8 @@
     "concurrently": "^8.0.0",
     "lerna": "^4.0.0",
     "node-gyp": "^9.0.0",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.3.2",
     "typescript": "~5.0.0"
   },
