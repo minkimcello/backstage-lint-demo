@@ -1,5 +1,5 @@
 diff --git a/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js b/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
-index e5b09ed..59b57e4 100644
+index e5b09ed..8a88205 100644
 --- a/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
 +++ b/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
 @@ -74,7 +74,54 @@ async function command(opts) {
@@ -57,11 +57,21 @@ index e5b09ed..59b57e4 100644
      if (resultText) {
        console.log();
        console.log(chalk__default["default"].red(`Lint failed in ${relativeDir}:`));
-@@ -83,7 +130,6 @@ async function command(opts) {
+@@ -83,7 +130,16 @@ async function command(opts) {
      }
    }
    if (failed) {
 -    process.exit(1);
++    const combined_violations_sorted = violations_combined
++    .reduce((acc, item) => {
++      const already_exists = acc.findIndex(acc_item => acc_item.rule === item.rule);
++      if (already_exists > -1) {
++        acc[already_exists].count = acc[already_exists].count + item.count
++        return acc;
++      } else {
++        return [...acc, item];
++      }
++    }, []);
    }
  }
  
