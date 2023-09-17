@@ -1,8 +1,8 @@
 diff --git a/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js b/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
-index e5b09ed..97ee031 100644
+index e5b09ed..ed535b7 100644
 --- a/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
 +++ b/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
-@@ -74,6 +74,13 @@ async function command(opts) {
+@@ -74,7 +74,17 @@ async function command(opts) {
      }
    });
    let failed = false;
@@ -14,5 +14,9 @@ index e5b09ed..97ee031 100644
 +  let violations_combined = [];
 +
    for (const { relativeDir, resultText } of resultsList) {
++    const package_dir = path.join(errors_dir, relativeDir);
++    fs.mkdirSync(package_dir, { recursive: true });
++
      if (resultText) {
        console.log();
+       console.log(chalk__default["default"].red(`Lint failed in ${relativeDir}:`));
