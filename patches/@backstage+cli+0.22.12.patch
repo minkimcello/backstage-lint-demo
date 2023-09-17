@@ -1,5 +1,5 @@
 diff --git a/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js b/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
-index e5b09ed..8a88205 100644
+index e5b09ed..94fb305 100644
 --- a/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
 +++ b/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
 @@ -74,7 +74,54 @@ async function command(opts) {
@@ -57,7 +57,7 @@ index e5b09ed..8a88205 100644
      if (resultText) {
        console.log();
        console.log(chalk__default["default"].red(`Lint failed in ${relativeDir}:`));
-@@ -83,7 +130,16 @@ async function command(opts) {
+@@ -83,7 +130,22 @@ async function command(opts) {
      }
    }
    if (failed) {
@@ -72,6 +72,12 @@ index e5b09ed..8a88205 100644
 +        return [...acc, item];
 +      }
 +    }, []);
++
++    fs.writeFileSync(errors_dir + "/summary.json", JSON.stringify({
++      count: errors_summary.total_count,
++      errors_combined: combined_violations_sorted.sort((a, b) => a.rule.localeCompare(b.rule)),
++      per_package: errors_summary.per_package.sort((a, b) => a.package.localeCompare(b.rule)),
++    }, null, 2));
    }
  }
  
