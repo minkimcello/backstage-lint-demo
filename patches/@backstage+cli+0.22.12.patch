@@ -1,8 +1,8 @@
 diff --git a/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js b/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
-index e5b09ed..306c69a 100644
+index e5b09ed..c50d5b1 100644
 --- a/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
 +++ b/node_modules/@backstage/cli/dist/cjs/lint-d9ce2976.cjs.js
-@@ -74,7 +74,20 @@ async function command(opts) {
+@@ -74,7 +74,22 @@ async function command(opts) {
      }
    });
    let failed = false;
@@ -19,6 +19,8 @@ index e5b09ed..306c69a 100644
 +
 +    const stripAnsi = new RegExp(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g);
 +    const resultTextFormatted = resultText.replace(stripAnsi, "").split("\n");
++
++    fs.writeFileSync(`${package_dir}/results.txt`, `${relativeDir}\n${resultTextFormatted.join('\n')}\n`);
 +
      if (resultText) {
        console.log();
